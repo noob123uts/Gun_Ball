@@ -1,0 +1,164 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/thanhdat4461/OrionMoblie/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Gun Ball", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+
+local Tab = Window:MakeTab({
+	Name = "AutoParry",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Functions"
+})
+
+OrionLib:MakeNotification({
+	Name = "Welcome Player!",
+	Content = "Welcome to gun ball",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+
+Tab:AddToggle({
+	Name = "Auto Gun the ball",
+	Default = false,
+	Callback = function(Value)
+		getgenv().auto_block = Value
+        local function auto()
+            while true do
+                if auto_block then
+                    game:GetService("ReplicatedStorage").RemoteEvent:FireServer({
+                        ["name"] = "defense",
+                        ["origin"] = "balltargets"
+                    },{})
+                else break
+                end
+                wait()
+            end
+        end
+        auto()
+	end    
+})
+
+Tab:AddToggle({
+	Name = "Auto Spam",
+	Default = false,
+	Callback = function(Value)
+getgenv().auto_spam = Value
+        local function auto()
+            while true do
+                if auto_spamshooot then
+                    game:GetService("ReplicatedStorage").RemoteEvent:FireServer({
+                        ["name"] = "defense",
+                        ["origin"] = "balltargets"
+                    },{})
+                else break
+                end
+                wait()
+            end
+        end
+        auto()
+	end    
+})
+
+Tab:AddParagraph("Idk what this prolly don't work","inf Gem Need All Quest")
+
+Tab:AddToggle({
+	Name = "INF GEM!",
+	Default = false,
+	Callback = function(Value)
+		getgenv().inf_gems = Value
+        local function auto()
+            while true do
+                if inf_gems then
+                    local ohTable1 = {
+                        ["name"] = "redeem",
+                        ["origin"] = "quests"
+                    }
+                    local ohTable2 = {
+                        [1] = getgenv().quest
+                    }
+
+                    game:GetService("ReplicatedStorage").RemoteEvent:FireServer(ohTable1, ohTable2)
+                    game:GetService("ReplicatedStorage").RemoteEvent:FireServer(ohTable1, ohTable2)
+                    game:GetService("ReplicatedStorage").RemoteEvent:FireServer(ohTable1, ohTable2)
+                else break
+                end
+                wait()
+            end
+        end
+        auto()
+	end    
+})
+
+
+local Tab = Window:MakeTab({
+	Name = "Player",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+--[[
+Name = <string> - The name of the tab.
+Icon = <string> - The icon of the tab.
+PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
+]]
+
+local Section = Tab:AddSection({
+	Name = "Movement"
+})
+
+--[[
+Name = <string> - The name of the section.
+]]
+
+Tab:AddSlider({
+	Name = "WalkSpeed",
+	Min = 16,
+	Max = 500,
+	Default = 16,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "Speed",
+	Callback = function(Value)
+	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+	end    
+})
+
+--[[
+Name = <string> - The name of the slider.
+Min = <number> - The minimal value of the slider.
+Max = <number> - The maxium value of the slider.
+Increment = <number> - How much the slider will change value when dragging.
+Default = <number> - The default value of the slider.
+ValueName = <string> - The text after the value number.
+Callback = <function> - The function of the slider.
+]]
+
+
+Tab:AddSlider({
+	Name = "Jump Height",
+	Min = 16,
+	Max = 500,
+	Default = 16,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "Jump Power",
+	Callback = function(Value)
+	game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
+	end    
+})
+
+Tab:AddParagraph("Infinite yield","A admin script.")
+
+
+Tab:AddButton({
+	Name = "Infinite yield",
+	Callback = function()
+      		loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
